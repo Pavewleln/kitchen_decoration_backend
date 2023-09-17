@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4000
 app.use(express.json());
 app.use(cors())
 
-app.post("/application", async (req, res) => {
+app.post("/", async (req, res) => {
   try {
 
       const {
