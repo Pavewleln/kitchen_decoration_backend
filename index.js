@@ -17,7 +17,6 @@ app.post("/", async (req, res) => {
       const {
           // general
           name,
-          surname,
           phone,
           subject,
           connection,
@@ -105,7 +104,6 @@ app.post("/", async (req, res) => {
               <b>Здравствуйте!</b>
               <p>На вашем сайте в ${date}, ${hours + ":" + minutes + ":" + seconds} была оставлена заявка</p>
               <p>Имя: ${name}</p>
-              <p>Фамилия: ${surname}</p>
               <p>Телефон: ${phone}</p>
               Клиент заказал ${subject === "kitchen" ? "кухню" : "шкаф"}.
               ${subject === "kitchen" ?
