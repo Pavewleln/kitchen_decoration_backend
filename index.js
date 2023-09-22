@@ -68,9 +68,9 @@ app.post("/", async (req, res) => {
           }
       })
       // Send an email notification
-      const mailOptions = {
+      const mailOptions_1 = {
           from: process.env.EMAIL_SENDER,
-          to: process.env.EMAIL_RECIPIENT,
+          to: process.env.EMAIL_RECIPIENT_1,
           subject: 'Новая заявка',
           html: `
           <html>
@@ -132,8 +132,73 @@ app.post("/", async (req, res) => {
           </html>
           `
       };
+      const mailOptions_2 = {
+        from: process.env.EMAIL_SENDER,
+        to: process.env.EMAIL_RECIPIENT_2,
+        subject: 'Новая заявка',
+        html: `
+        <html>
+            <head>
+            <title>Новая заявка</title>
+            <style>
+                body {
+                    font-family: 'Helvetica Neue', Arial, sans-serif;
+                    font-size: 16px;
+                    line-height: 1.5;
+                    color: #333;
+                    background-color: #fff;
+                }
+                
+                h1 {
+                    font-size: 24px;
+                    margin-bottom: 10px;
+                }
+                
+                p {
+                    margin-bottom: 10px;
+                }
+                
+                img {
+                    max-width: 100%;
+                }
+            </style>
+            </head>
+            <body>
+            <h1>Новая заявка</h1>
+            <b>Здравствуйте!</b>
+            <p>На вашем сайте в ${date}, ${hours + ":" + minutes + ":" + seconds} была оставлена заявка</p>
+            <p>Имя: ${name}</p>
+            <p>Телефон: ${phone}</p>
+            Клиент заказал ${subject === "kitchen" ? "кухню" : "шкаф"}.
+            ${subject === "kitchen" ?
+                `${kitchen__help}.<br>
+        ${kitchen__shape}.<br>
+        ${kitchen__size__A ? `Размер А - ${kitchen__size__A} см <br>` : ""}
+        ${kitchen__size__B ? `Размер B - ${kitchen__size__B} см <br>` : ""}
+        ${kitchen__size__C ? `Размер C - ${kitchen__size__C} см <br>` : ""}
+        ${kitchen__material}.<br>
+        ${kitchen__fittings}.<br>
+        ${kitchen__date}.<br>
+        ${kitchen__budget}.<br>
+        ${connection}.`
+                :
+                `${cupboard__help}.<br>
+        ${cupboard__room}.<br>
+        ${cupboard__size__height ? `Высота шкафа - ${cupboard__size__height} см <br>` : ""}
+        ${cupboard__size__width ? `Ширина шкафа - ${cupboard__size__width} см <br>` : ""}
+        ${cupboard__size__depth ? `Глубина шкафа - ${cupboard__size__depth} см <br>` : ""}
+        ${cupboard__type}.<br>
+        ${cupboard__view}.<br>
+        ${cupboard__date}.<br>
+        ${cupboard__budget}.<br>`
+            }
+            </body>
+        </html>
+        `
+    };
 
-      transporter.sendMail(mailOptions);
+      transporter.sendMail(mailOptions_1);
+      transporter.sendMail(mailOptions_2);
       res.status(200).json({
           message: "successfully"
       })
